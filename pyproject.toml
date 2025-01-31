@@ -2,7 +2,7 @@
 name = "xai-aws"
 version = "0.1.0"
 description = "AWS Components for Xircuits"
-authors = [{ name = "XpressAI", email = "support@xpress.ai" }]
+authors = [{ name = "XpressAI", email = "eduardo@xpress.ai" }]
 license = "Apache-2.0"
 readme = "README.md"
 repository = "git@github.com:XpressAI/xai-aws.git"
