@@ -38,6 +38,3 @@ pip install -r requirements.txt
 - `DynamoDBPutItem`: Insert an item into a DynamoDB table
 - `DynamoDBGetItem`: Retrieve an item from a DynamoDB table
 - `DynamoDBDeleteItem`: Delete an item from a DynamoDB table
-
-## Tests
-A github action to test your workflow runs has been provided. Simply add the path of your workflows [here](.github/workflows/run-workflow-tests.yml#L11).
