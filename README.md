@@ -38,3 +38,8 @@ pip install -r requirements.txt
 - `DynamoDBPutItem`: Insert an item into a DynamoDB table
 - `DynamoDBGetItem`: Retrieve an item from a DynamoDB table
 - `DynamoDBDeleteItem`: Delete an item from a DynamoDB table
+
+### Bedrock Components
+- `AWSBedrockClient`: Initialize a Bedrock client
+- `AWSBedrockListModels`: List available models from Bedrock
+- `AWSBedrockInvokeAnthropicModel`: Invoke a model hosted on AWS Bedrock
