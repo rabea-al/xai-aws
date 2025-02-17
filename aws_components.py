@@ -211,3 +211,51 @@ class DynamoDBDeleteItem(Component):
             Key=self.key.value
         )
         self.response.value = response
+
+
+@xai_component
+class GlueStartJobRun(Component):
+    """Component to start an AWS Glue job run.
+
+    ##### inPorts:
+    - job_name (str): The name of the AWS Glue job.
+    - arguments (dict): Optional arguments to pass to the job.
+
+    ##### outPorts:
+    - job_run_id (str): The ID of the started job run.
+    """
+    job_name: InArg[str]
+    arguments: InArg[dict]
+    job_run_id: OutArg[str]
+
+    def execute(self, ctx) -> None:
+        glue = boto3.client('glue')
+        response = glue.start_job_run(
+            JobName=self.job_name.value,
+            Arguments=self.arguments.value or {}
+        )
+        self.job_run_id.value = response['JobRunId']
+
+
+@xai_component
+class GetGlueJobStatus(Component):
+    """Component to get the status of an AWS Glue job run.
+
+    ##### inPorts:
+    - job_name (str): The name of the AWS Glue job.
+    - job_run_id (str): The ID of the Glue job run.
+
+    ##### outPorts:
+    - job_status (str): The current status of the job run.
+    """
+    job_name: InArg[str]
+    job_run_id: InArg[str]
+    job_status: OutArg[str]
+
+    def execute(self, ctx) -> None:
+        glue = boto3.client('glue')
+        response = glue.get_job_run(
+            JobName=self.job_name.value,
+            RunId=self.job_run_id.value
+        )
+        self.job_status.value = response['JobRun']['JobRunState']
