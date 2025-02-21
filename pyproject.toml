@@ -8,6 +8,10 @@ readme = "README.md"
 repository = "git@github.com:XpressAI/xai-aws.git"
 keywords = ["xircuits", "aws", "s3", "sqs", "dynamodb"]
 
+dependencies = [
+    "boto3==1.36.10",
+]
+
 # Xircuits-specific configurations
 [tool.xircuits]
 requirements_path = "requirements.txt"
