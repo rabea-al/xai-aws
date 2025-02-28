@@ -48,7 +48,7 @@ class SQSReceiveMessage(Component):
         response = sqs.receive_message(
             QueueUrl=self.queue_url.value,
             MaxNumberOfMessages=self.max_message_count.value if self.max_message_count.value is not None else 10,
-            WaitTimeSeconds=self.wait_time_secs if self.wait_time_secs.value is not None else 10
+            WaitTimeSeconds=self.wait_time_secs.value if self.wait_time_secs.value is not None else 10
         )
         self.messages.value = response.get('Messages', [])
 
