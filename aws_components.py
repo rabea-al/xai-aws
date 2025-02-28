@@ -32,21 +32,26 @@ class SQSReceiveMessage(Component):
 
     ##### inPorts:
     - queue_url (str): The URL of the SQS queue.
+    - max_message_count (int): The max number of messages to get from the queue.
+    - wait_time_secs (int): The amount of time to wait for new messages.
     
     ##### outPorts:
     - messages (list): A list of received messages.
     """
     queue_url: InArg[str]
+    max_message_count: InArg[int]
+    wait_time_secs: InArg[int]
     messages: OutArg[list]
 
     def execute(self, ctx) -> None:
         sqs = boto3.client('sqs')
         response = sqs.receive_message(
             QueueUrl=self.queue_url.value,
-            MaxNumberOfMessages=10,
-            WaitTimeSeconds=10
+            MaxNumberOfMessages=self.max_message_count.value if self.max_message_count.value is not None else 10,
+            WaitTimeSeconds=self.wait_time_secs if self.wait_time_secs.value is not None else 10
         )
         self.messages.value = response.get('Messages', [])
+
 
 
 @xai_component
